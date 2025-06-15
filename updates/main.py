@@ -148,7 +148,7 @@ class UpdateManager(QThread):
         print("DEBUG: UpdateManager.run() démarré.") # Nouveau DEBUG
         self.update_status_message.emit("Vérification des mises à jour du jeu...")
         current_version = self._get_current_game_version()
-        self.update_status_message.emit(f"Version locale du jeu : {current_version}")
+        self.update_status_message.emit(f"Version locale du jeu : {current_version} TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST")
         self.update_progress_value.emit(0)
 
         # Vérification critique de requests_module AVANT l'utilisation
@@ -239,7 +239,7 @@ class UpdateManager(QThread):
             try:
                 with open(LOCAL_VERSION_FILE, "r") as f:
                     version = f.read().strip()
-                    print(f"DEBUG: Version locale lue: {version} TESTTTTTTSTSTSTSTSTSTTSTSTSSTTSTSTSTSTSTSTSTSTSTSTSTSSTSTSTSTSTSTSTSTSSTSTST") # Nouveau DEBUG
+                    print(f"DEBUG: Version locale lue: {version}") # Nouveau DEBUG
                     return version
             except Exception as e:
                 print(f"DEBUG ERROR: Impossible de lire le fichier de version locale: {e}") # Nouveau DEBUG
@@ -410,8 +410,14 @@ except Exception as e:
                              creationflags=subprocess.DETACHED_PROCESS if os.name == 'nt' else 0,
                              close_fds=True) # close_fds=True pour Linux/macOS
             
-            # Indiquer à l'écran de chargement de se fermer
-            QTimer.singleShot(100, lambda: self.update_finished.emit(True)) # Indique une mise à jour réussie
+            # --- PAUSE POUR LE DÉBOGAGE ---
+            print("DEBUG: PAUSE pour vérification manuelle. NE FERMEZ PAS CETTE FENÊTRE.")
+            print(f"DEBUG: Vérifiez le dossier: {os.path.join(os.getcwd(), 'update_temp_staging')}")
+            time.sleep(600) # Pause de 10 minutes (600 secondes) pour vous laisser le temps de vérifier
+            # --- FIN DE PAUSE ---
+
+            # Après la pause, l'application devrait se fermer normalement
+            QTimer.singleShot(100, lambda: self.update_finished.emit(True))
             return True
 
         except requests_module.exceptions.Timeout:
