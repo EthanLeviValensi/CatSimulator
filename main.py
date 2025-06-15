@@ -239,7 +239,7 @@ class UpdateManager(QThread):
             try:
                 with open(LOCAL_VERSION_FILE, "r") as f:
                     version = f.read().strip()
-                    print(f"DEBUG: Version locale lue: {version}") # Nouveau DEBUG
+                    print(f"DEBUG: Version locale lue: {version} TESTTTTTTSTSTSTSTSTSTTSTSTSSTTSTSTSTSTSTSTSTSTSTSTSTSSTSTSTSTSTSTSTSTSSTSTST") # Nouveau DEBUG
                     return version
             except Exception as e:
                 print(f"DEBUG ERROR: Impossible de lire le fichier de version locale: {e}") # Nouveau DEBUG
